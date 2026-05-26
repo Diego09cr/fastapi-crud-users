@@ -60,3 +60,16 @@ def cria_usu(usuario: UsuarioNovo):
     }
     usuarios.append(novo)
     return novo
+
+@app.put("/usuarios/{id}")
+def att_user(id, usuario: UsuarioNovo):
+    pessoa = buscar_id(id)
+    pessoa["nome"] = usuario.nome
+    pessoa["email"] = usuario.email
+    return pessoa
+
+@app.delete("/usuarios/{id}")
+def tchau_user(id):
+    pessoa = buscar_id(id)
+    usuarios.remove(pessoa)
+    return {"mensagem": "Usuário excluído com sucesso"}
